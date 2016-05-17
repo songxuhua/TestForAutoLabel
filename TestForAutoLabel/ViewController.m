@@ -11,6 +11,7 @@
 #import "HeapAlgorithm.h"
 #import "UITableView+FDTemplateLayoutCell.h"
 #import "UITableView+FDTemplateLayoutCellDebug.h"
+#import "UITableView+FDIndexPathHeightCache.h"
 
 #define kMainTableviewCellInterface @"MainTableViewCell"
 
@@ -107,10 +108,9 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {//iOS7上xib Tableview的自适应https://github.com/forkingdog/UITableView-FDTemplateLayoutCell
-    CGFloat height = [tableView fd_heightForCellWithIdentifier:kMainTableviewCellInterface configuration:^(MainTableViewCell *cell) {
+    CGFloat height = [tableView fd_heightForCellWithIdentifier:kMainTableviewCellInterface cacheByIndexPath:indexPath configuration:^(id cell) {
         [self configureCell:cell atIndexPath:indexPath];
         NSLog(@"heigthcell is %p",cell);
-
     }];
     return height;
 }
